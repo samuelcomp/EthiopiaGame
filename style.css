@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 #canvas1{
     border: 5px solid black;
     position: absolute;
@@ -10,6 +11,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
 }
+
 #player{
     display: none;
 }

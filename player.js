@@ -10,10 +10,7 @@ export class Player {
         this.image=document.getElementById("player");
         this.speed=0;
         this.maxspeed=10;
-    }
-
-
-    
+    }    
     update(input){
         //this.x++;
         //this is for horizontal movement 
@@ -39,8 +36,6 @@ export class Player {
                 // vertical movement.
             
     }
-
-
 
     onGround(){
         return this.y >= this.game.height -this.height;

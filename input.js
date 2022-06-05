@@ -1,6 +1,7 @@
 export class InputHandler {
     constructor(){
         this.keys = [];
+        
         window.addEventListener('keydown',e=>{
             console.log(e.key);
             if((
@@ -13,6 +14,7 @@ export class InputHandler {
                 this.keys.push(e.key);
             }
         });
+
         window.addEventListener('keyup',e=>{
             if(
                 e.key === 'ArrowDown' || 
