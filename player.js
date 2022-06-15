@@ -5,11 +5,15 @@ export class Player {
         this.width=100;
         this.height=91.3;
         this.x=0;
-        this.y=this.game.height-this.height;
+        this.y=this.game.height-this.height-this.game.groundMargin;
         this.vy=0;
         this.weight=1;
         this.frameX=0;
         this.frameY=0;
+        this.maxFrame;
+        this.fps=20;
+        this.frameInterval=1000/this.fps;
+        this.frameTimer=0;
         this.image=document.getElementById("player");
         this.speed=0;
         this.maxspeed=10;
@@ -17,7 +21,7 @@ export class Player {
         this.currentState=this.states[0];
         this.currentState.enter();
     }    
-    update(input){
+    update(input,deltaTime){
         this.currentState.handleInput(input);
         //this.x++;
         //this is for horizontal movement 
@@ -40,7 +44,16 @@ export class Player {
                 this.vy += this.weight;
             else
                 this.vy=0;
-                // vertical movement.
+                // Sprint animation
+                if(this.frameTimer > this.frameInterval)
+                {
+                    this.frameTimer=0;
+                    if(this.frameX < this.maxFrame) this.frameX++
+                    else this.frameX=0;
+                }
+               else{
+                   this.frameTimer+=deltaTime;
+               }
             
     }
     draw(context){
@@ -51,7 +64,7 @@ export class Player {
     }
 
     onGround(){
-        return this.y >= this.game.height -this.height;
+        return this.y >= this.game.height -this.height-this.game.groundMargin;
     }
     setState(state){
         this.currentState=this.states[state];
