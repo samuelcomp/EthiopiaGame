@@ -16,7 +16,7 @@ export class Player {
         this.frameTimer=0;
         this.image=document.getElementById("player");
         this.speed=0;
-        this.maxspeed=10;
+        this.maxspeed=6;
         this.states=[new Sitting(this),new Running(this),new Jumping(this),new Falling(this)];
         this.currentState=this.states[0];
         this.currentState.enter();
@@ -36,9 +36,7 @@ export class Player {
             if(this.x > this.game.width - this.width)
                 this.x=this.game.width-this.width;
         //this is for vertical movement 
-           // this.y += this.vy;
-          //  if(input.includes('ArrowUp') && this.onGround())
-          //      this.vy -= 25;
+          
                 this.y+=this.vy;
             if(!this.onGround())
                 this.vy += this.weight;
@@ -48,7 +46,7 @@ export class Player {
                 if(this.frameTimer > this.frameInterval)
                 {
                     this.frameTimer=0;
-                    if(this.frameX < this.maxFrame) this.frameX++
+                    if(this.frameX < this.maxFrame) this.frameX++;
                     else this.frameX=0;
                 }
                else{
@@ -57,8 +55,8 @@ export class Player {
             
     }
     draw(context){
-        //context.fillStyle="red";
-        //context.fillRect(this.x,this.y,this.width,this.height);
+       // context.fillStyle="red";
+       // context.fillRect(this.x,this.y,this.width,this.height);
        context.drawImage(this.image,this.frameX*this.width,this.frameY*this.height,this.width,this.height,this.x,this.y,this.width,this.height);
         //context.drawImage(this.image,0,0,this.width,this.height,this.x,this.y,this.width,this.height);
     }
@@ -66,8 +64,10 @@ export class Player {
     onGround(){
         return this.y >= this.game.height -this.height-this.game.groundMargin;
     }
-    setState(state){
+    setState(state,speed){
         this.currentState=this.states[state];
+       //this.game.speed=speed;
+        this.game.speed=this.game.maxspeed * speed;
         this.currentState.enter();
     }
 }
